@@ -93,3 +93,8 @@ laby.empty()
 print(laby)
 
 print(laby.get_contiguous_cells((0,1)))
+
+laby.add_wall((0,0), (0,1))
+print(laby.get_reachable_cells((0,1)))
+
+print(laby.get_cells())

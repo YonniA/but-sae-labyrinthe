@@ -152,3 +152,9 @@ class Maze:
                     0 <= cell[1] < self.width):
                 cell_voisines.remove(cell)
         return cell_voisines
+
+    def get_reachable_cells(self, c):
+        return [cell for cell in self.neighbors[c]]
+
+    def get_cells(self):
+        return [cell for cell in self.neighbors.keys()]
