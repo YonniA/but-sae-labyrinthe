@@ -126,3 +126,16 @@ class Maze:
     def fill(self):
         for key in self.neighbors.keys():
             self.neighbors[key] = []
+
+    def empty(self):
+        self.neighbors = {(i, j): set() for i in range(self.height) for j in range(self.width)}
+        for i in range(self.height):
+            for j in range(self.width):
+                if i > 0:
+                    self.neighbors[(i, j)].add((i - 1, j))
+                if i < self.height - 1:
+                    self.neighbors[(i, j)].add((i + 1, j))
+                if j > 0:
+                    self.neighbors[(i, j)].add((i, j - 1))
+                if j < self.width - 1:
+                    self.neighbors[(i, j)].add((i, j + 1))
