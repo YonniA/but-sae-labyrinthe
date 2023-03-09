@@ -84,3 +84,8 @@ print(laby)
 print(laby.get_walls())
 laby.add_wall((0,0), (0,1))
 print(laby.get_walls())
+
+laby = Maze(5, 5, empty = True)
+print(laby)
+laby.fill()
+print(laby)

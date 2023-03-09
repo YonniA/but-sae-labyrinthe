@@ -122,3 +122,7 @@ class Maze:
                 if j < self.width - 1 and (i, j + 1) not in self.neighbors[(i, j)]:
                     walls.append(((i, j), (i, j + 1)))
         return walls
+
+    def fill(self):
+        for key in self.neighbors.keys():
+            self.neighbors[key] = []
