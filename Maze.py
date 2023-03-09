@@ -139,3 +139,16 @@ class Maze:
                     self.neighbors[(i, j)].add((i, j - 1))
                 if j < self.width - 1:
                     self.neighbors[(i, j)].add((i, j + 1))
+
+    def get_contiguous_cells(self, c: tuple) -> list:
+        x = c[0]
+        y = c[1]
+        cell_voisines = [(x, y + 1),
+                            (x, y - 1),
+                            (x - 1, y),
+                            (x + 1, y)]
+        for cell in cell_voisines:
+            if not (0 <= cell[0] < self.height and
+                    0 <= cell[1] < self.width):
+                cell_voisines.remove(cell)
+        return cell_voisines

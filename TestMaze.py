@@ -91,3 +91,5 @@ laby.fill()
 print(laby)
 laby.empty()
 print(laby)
+
+print(laby.get_contiguous_cells((0,1)))
