@@ -1,3 +1,4 @@
+import random
 class Maze:
     """
     Classe Labyrinthe
@@ -158,3 +159,43 @@ class Maze:
 
     def get_cells(self):
         return [cell for cell in self.neighbors.keys()]
+
+    @classmethod
+    def gen_btree(cls, h, w):
+        maze = Maze(h, w)
+        for i in range(h):
+            for j in range(w):
+                directions = []
+                if j < w - 1:
+                    directions.append('E')
+                if i < h - 1:
+                    directions.append('S')
+                if len(directions) > 0:
+                    direction = random.choice(directions)
+                    if direction == 'E':
+                        maze.remove_wall((i, j), (i, j + 1))
+                    elif direction == 'S':
+                        maze.remove_wall((i, j), (i + 1, j))
+        return maze
+
+    @classmethod
+    def gen_sidewinder(cls, h, w):
+        maze = Maze(h, w)
+        for i in range(h - 1):
+            sequence = []
+            for j in range(w - 1):
+                sequence.append((i, j))
+                if (j == w - 1 or i < h - 1) and bool(random.getrandbits(1)):
+                    choix = random.choice(sequence)
+                    maze.remove_wall(choix, (choix[0] + 1, choix[1]))
+                    sequence = []
+                else:
+                    maze.remove_wall((i, j), (i, j + 1))
+            sequence.append((i, j))
+            choix = random.choice(sequence)
+            maze.remove_wall(choix, (choix[0] + 1, choix[1]))
+        for j in range(w - 1):
+            maze.remove_wall((h - 1, j), (h - 1, j + 1))
+        return maze
+
+
