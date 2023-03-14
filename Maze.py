@@ -198,4 +198,79 @@ class Maze:
             maze.remove_wall((h - 1, j), (h - 1, j + 1))
         return maze
 
+    @classmethod
+    def gen_fusion(cls, h, w):
+        laby = cls(h, w)
+        labels = {}
+        for i, j in laby.get_cells():
+            labels[(i, j)] = (i, j)
+        walls = laby.get_walls()
+        random.shuffle(walls)
+        for c1, c2 in walls:
+            if (0 <= c1[0] < h and
+               0 <= c1[1] < w and
+               0 <= c2[0] < h and
+               0 <= c2[1] < w):
+                label1 = labels[c1]
+                label2 = labels[c2]
+                if label1 != label2:
+                    laby.remove_wall(c1, c2)
+                    new_label = label2
+                    old_label = label1
+                    for cell in labels:
+                        if labels[cell] == old_label:
+                            labels[cell] = new_label
+        return laby
+
+    @classmethod
+    def gen_exploration(cls, h, w):
+        laby = cls(h, w)
+        cellules_disponibles = laby.get_cells()
+        cellule_initiale = random.choice(cellules_disponibles)
+        cellules_visitees = [cellule_initiale]
+        pile = [cellule_initiale]
+        while pile:
+            cellule_courante = pile.pop(0)
+            cellules_non_visitees = []
+            for cellule in laby.get_contiguous_cells(cellule_courante):
+                if cellule not in cellules_visitees:
+                    if 0 <= cellule[0] < h and 0 <= cellule[1] < w:
+                        cellules_non_visitees.append(cellule)
+            if cellules_non_visitees:
+                pile.insert(0, cellule_courante)
+                cellule_suivante = random.choice(cellules_non_visitees)
+                laby.remove_wall(cellule_courante, cellule_suivante)
+                cellules_visitees.append(cellule_suivante)
+                pile.insert(0, cellule_suivante)
+        return laby
+
+    @classmethod
+    def gen_wilson(cls, h, w):
+        laby = cls(h, w)
+        visites = [(random.randint(0, h - 1), random.randint(0, w - 1))]
+        while len(visites) < h * w:
+            i = 0
+            cellule = (random.randint(0, h - 1), random.randint(0, w - 1))
+            while cellule in visites:
+                cellule = (random.randint(0, h - 1), random.randint(0, w - 1))
+            chemin = [cellule]
+            while chemin[i] not in visites:
+                cellules_possibles = []
+                for j in laby.get_contiguous_cells(cellule):
+                    cellules_possibles.append(j)
+                choix_random = random.randint(0, len(cellules_possibles) - 1)
+                cellule = cellules_possibles[choix_random]
+                if cellule not in chemin:
+                    chemin.append(cellules_possibles[choix_random])
+                else:
+                    temp = 0
+                    while temp != cellule:
+                        temp = chemin.pop()
+                        i -= 1
+                    chemin.append(cellule)
+                i += 1
+            for i in range(len(chemin) - 1):
+                laby.remove_wall(chemin[i], chemin[i + 1])
+                visites.append(chemin[i])
+        return laby
 
