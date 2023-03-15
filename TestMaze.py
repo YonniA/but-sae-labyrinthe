@@ -156,3 +156,4 @@ str_solution[(14, 14)] = 'A'
 print(laby.overlay(str_solution))
 
 print(laby.distance_geo((0,0),(14,14)))
+print(laby.distance_man((0,0),(14,14)))

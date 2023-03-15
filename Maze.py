@@ -551,3 +551,5 @@ class Maze:
     def distance_geo(self,c1,c2):
         return len(self.solve_bfs(c1, c2))
 
+    def distance_man(self,c1,c2):
+        return abs(c1[0]-c2[0]) + abs(c1[1]-c2[1])
