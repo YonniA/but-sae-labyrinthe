@@ -499,4 +499,52 @@ class Maze:
 
         return way
 
+    def solve_rhr(self, start, stop):
+        """
+        Résout le labyrinthe en utilisant la technique de la main droite, à partir de la cellule de départ donnée.
+
+        :return: La liste ordonnée des cellules visitées pour atteindre la sortie.
+        """
+        # On initialise la cellule courante avec la cellule de départ et la direction avec 'droite'.
+        cellule_courante = start
+        direction_courante = 'bas' \
+                             ''
+        cellules_visitees = [cellule_courante]
+
+        while cellule_courante != stop:
+            # On détermine la cellule suivante en fonction de la direction courante.
+            if direction_courante == 'droite':
+                cellule_suivante = (cellule_courante[0], cellule_courante[1] + 1)
+            elif direction_courante == 'bas':
+                cellule_suivante = (cellule_courante[0] + 1, cellule_courante[1])
+            elif direction_courante == 'gauche':
+                cellule_suivante = (cellule_courante[0], cellule_courante[1] - 1)
+            else:
+                cellule_suivante = (cellule_courante[0] - 1, cellule_courante[1])
+
+            # Si la cellule suivante n'a pas de mur dans la direction courante, on avance dans cette direction.
+            if cellule_suivante in self.neighbors[cellule_courante]:
+                cellules_visitees.append(cellule_suivante)
+                cellule_courante = cellule_suivante
+                # On tourne à droite en changeant la direction courante de 90° dans le sens horaire.
+                if direction_courante == 'droite':
+                    direction_courante = 'bas'
+                elif direction_courante == 'bas':
+                    direction_courante = 'gauche'
+                elif direction_courante == 'gauche':
+                    direction_courante = 'haut'
+                elif direction_courante == 'haut':
+                    direction_courante = 'droite'
+            # Sinon, on tourne à gauche en changeant la direction courante de 90° dans le sens anti-horaire.
+            else:
+                # On tourne à gauche en changeant la direction courante de 90° dans le sens anti-horaire.
+                if direction_courante == 'droite':
+                    direction_courante = 'haut'
+                elif direction_courante == 'haut':
+                    direction_courante = 'gauche'
+                elif direction_courante == 'gauche':
+                    direction_courante = 'bas'
+                elif direction_courante == 'bas':
+                    direction_courante = 'droite'
+        return cellules_visitees
 

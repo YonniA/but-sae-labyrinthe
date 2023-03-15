@@ -147,3 +147,10 @@ str_solution = {c:'*' for c in solution}
 str_solution[( 0,  0)] = 'D'
 str_solution[(14, 14)] = 'A'
 print(laby.overlay(str_solution))
+
+laby = Maze.gen_exploration(15, 15)
+solution = laby.solve_rhr((0, 0), (14, 14))
+str_solution = {c:'*' for c in solution}
+str_solution[( 0,  0)] = 'D'
+str_solution[(14, 14)] = 'A'
+print(laby.overlay(str_solution))
