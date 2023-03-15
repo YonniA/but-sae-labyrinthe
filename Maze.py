@@ -117,11 +117,23 @@ class Maze:
                0 <= c2[0] < self.height and \
                0 <= c2[1] < self.width, \
             f"Erreur lors de l'ajout d'un mur entre {c1} et {c2} : les coordonnées de sont pas compatibles avec les dimensions du labyrinthe"
+<<<<<<< HEAD
         if c2 not in self.neighbors[c1]: # Si c2 n'est pas un voisin de c1
             self.neighbors[c1].add(c2) # Ajoute c2 comme voisin de c1
         if c1 not in self.neighbors[c2]: # Si c1 n'est pas un voisin de c2
             self.neighbors[c2].add(c1) # Ajoute c1 comme voisin de c2
+=======
+        # Si c2 n'est pas un voisin de c1
+        if c2 not in self.neighbors[c1]:
+            # Ajoute c2 comme voisin de c1
+            self.neighbors[c1].add(c2)
+        # Si c1 n'est pas un voisin de c2
+        if c1 not in self.neighbors[c2]:
+            # Ajoute c1 comme voisin de c2
+            self.neighbors[c2].add(c1)
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
 
+    # Permet d'obtenir une liste de tuple des coordonnées des cellules ayant un mur entre elles
     def get_walls(self):
         """
         Renvoi une liste des murs pouvant représenter le labyrinthe
@@ -129,14 +141,32 @@ class Maze:
         :return: Une liste de tous les murs dans le labyrinthe
         """
         walls = []  # Initialisation d'une liste vide pour stocker les murs
+<<<<<<< HEAD
         # Parcours de toutes les cellules du labyrinthe
+=======
+        # Parcours des lignes du labyrinthe
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
         for i in range(self.height):
+            # Parcours des colonnes du labyrinthe
             for j in range(self.width):
+<<<<<<< HEAD
                 if i < self.height - 1 and (i + 1, j) not in self.neighbors[(i, j)]: # Si la cellule actuelle a une cellule voisine en-dessous et ne sont pas voisins
                     walls.append(((i, j), (i + 1, j))) # Ajoute le mur à la liste des murs
                 if j < self.width - 1 and (i, j + 1) not in self.neighbors[(i, j)]: # Si la cellule actuelle a une cellule voisine à droite et ne sont pas voisins
                     walls.append(((i, j), (i, j + 1))) # Ajoute le mur à la liste des murs
         return walls # Renvoi la liste des murs
+=======
+                # Si la cellule actuelle a une cellule voisine en-dessous et ne sont pas voisins
+                if i < self.height - 1 and (i + 1, j) not in self.neighbors[(i, j)]:
+                    # Ajoute le mur à la liste des murs
+                    walls.append(((i, j), (i + 1, j)))
+                # Si la cellule actuelle a une cellule voisine à droite et ne sont pas voisins
+                if j < self.width - 1 and (i, j + 1) not in self.neighbors[(i, j)]:
+                    # Ajoute le mur à la liste des murs
+                    walls.append(((i, j), (i, j + 1)))
+        # Renvoi la liste des murs
+        return walls
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
 
     def fill(self):
         """
@@ -144,18 +174,29 @@ class Maze:
         """
         # Parcours de toutes les cellules du labyrinthe
         for key in self.neighbors.keys():
+<<<<<<< HEAD
             self.neighbors[key] = [] # Remplace les voisins de chaque cellule par une liste vide
+=======
+            # Remplace les voisins de chaque cellule par une liste vide
+            self.neighbors[key] = []
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
 
     def empty(self):
         """
         Initialise tous les voisins de chaque cellule par une cellule vide
         """
+<<<<<<< HEAD
         self.neighbors = {(i, j): set() for i in range(self.height) for j in range(self.width)} # Initialisation des voisins de chaque cellule à une cellule vide
+=======
+        # Initialisation des voisins de chaque cellule à une cellule vide
+        self.neighbors = {(i, j): set() for i in range(self.height) for j in range(self.width)}
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
         # Parcours de toutes les cellules du labyrinthe
         for i in range(self.height):
             for j in range(self.width):
                 # Ajout des voisins pour chaque cellule
                 if i > 0:
+<<<<<<< HEAD
                     self.neighbors[(i, j)].add((i - 1, j)) # Voisin du haut
                 if i < self.height - 1:
                     self.neighbors[(i, j)].add((i + 1, j)) # Voisin du bas
@@ -180,6 +221,41 @@ class Maze:
         if j < self.width - 1:
             contiguous_cells.append((i, j + 1))
         return contiguous_cells
+=======
+                    # Voisin du haut
+                    self.neighbors[(i, j)].add((i - 1, j))
+                if i < self.height - 1:
+                    # Voisin du bas
+                    self.neighbors[(i, j)].add((i + 1, j))
+                if j > 0:
+                    # Voisin de gauche
+                    self.neighbors[(i, j)].add((i, j - 1))
+                if j < self.width - 1:
+                    # Voisin de droite
+                    self.neighbors[(i, j)].add((i, j + 1))
+
+    def get_contiguous_cells(self, c: tuple) -> list:
+        """
+        Renvoi une liste des cellules voisines d'une cellule passée en paramètre
+
+        :param c: Tuple représentant les coordonnées d'une cellule du labyrinthe
+        """
+        # Récupération des coordonnées x et y de la cellule
+        x = c[0]
+        y = c[1]
+        # Initialisation d'une liste de potentielles cellules voisines
+        cell_voisines = [(x, y + 1),
+                            (x, y - 1),
+                            (x - 1, y),
+                            (x + 1, y)]
+        # Vérification de si les cellules voisines sont valides
+        for cell in cell_voisines:
+            # On supprime les cellules qui ne sont pas dans le labyrinthe
+            if not (0 <= cell[0] < self.height and 0 <= cell[1] < self.width):
+                cell_voisines.remove(cell)
+        # Renvoi la liste des cellules voisines
+        return cell_voisines
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
 
     def get_reachable_cells(self, c):
         """
@@ -207,8 +283,14 @@ class Maze:
         :param w: Nombre de colonnes du labyrinthe
         :return: Un labyrinthe
         """
+<<<<<<< HEAD
         maze = Maze(h, w) # Création d'un nouveau labyrinthe
         # Itère sur toutes les cellules du labyrinthe
+=======
+        # Créer un nouveau labyrinthe
+        maze = Maze(h, w)
+        # Itère sur toutes les cellules dans le labyrinthe
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
         for i in range(h):
             for j in range(w):
                 # Détermine les directions valides pour se déplacer sans sortir du labyrinthe
@@ -217,14 +299,26 @@ class Maze:
                     directions.append('E')
                 if i < h - 1:
                     directions.append('S')
+<<<<<<< HEAD
                 if len(directions) > 0: # Si il y 1 ou plusieurs directions possible
                     direction = random.choice(directions) # en prendre une au hasard
+=======
+                # Si il y 1 ou plusieurs directions possible
+                if len(directions) > 0:
+                    # en prendre une au hasard
+                    direction = random.choice(directions)
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
                     # Retire le mur à la direction choisie
                     if direction == 'E':
                         maze.remove_wall((i, j), (i, j + 1))
                     elif direction == 'S':
                         maze.remove_wall((i, j), (i + 1, j))
+<<<<<<< HEAD
         return maze # Renvoi le labyrinthe généré
+=======
+        # Renvoi le labyrinthe généré
+        return maze
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
 
     @classmethod
     def gen_sidewinder(cls, h, w):
@@ -235,25 +329,42 @@ class Maze:
         :param w: Nombre de colonnes à générer pour le labyrinthe
         :return: Un labyrinthe ayant pour dimensions h x w
         """
+<<<<<<< HEAD
         maze = Maze(h, w) # Création d'un nouveau labyrinthe
         # Parcours des cellules du labyrinthe avec l'algorithme Sidewinder
+=======
+        # Créer un nouveau labyrinthe
+        maze = Maze(h, w)
+        # Parcours des cellules avec l'algorithme Sidewinder
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
         for i in range(h - 1):
             sequence = []
             for j in range(w - 1):
                 sequence.append((i, j))
                 if (j == w - 1 or i < h - 1) and bool(random.getrandbits(1)):
+                    # Retire un mur vers le sud
                     choix = random.choice(sequence)
                     maze.remove_wall(choix, (choix[0] + 1, choix[1])) # Retire un mur vers le sud
                     sequence = []
                 else:
+<<<<<<< HEAD
                     maze.remove_wall((i, j), (i, j + 1)) # Retire un mur vers l'est
+=======
+                    # Retire un mur vers l'est
+                    maze.remove_wall((i, j), (i, j + 1))
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
             sequence.append((i, j))
             choix = random.choice(sequence)
             maze.remove_wall(choix, (choix[0] + 1, choix[1]))
         # Retire les murs du bas pour n'avoir qu'un seul passage
         for j in range(w - 1):
             maze.remove_wall((h - 1, j), (h - 1, j + 1))
+<<<<<<< HEAD
         return maze # Renvoi le labyrinthe généré
+=======
+        # Renvoi le labyrinthe généré
+        return maze
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
 
     @classmethod
     def gen_fusion(cls, h, w):
@@ -264,13 +375,25 @@ class Maze:
         :param w: Nombre de colonnes du labyrinthe
         :return: Un labyrinthe
         """
+<<<<<<< HEAD
         laby = cls(h, w) # Création d'un nouveau labyrinthe
+=======
+        # Créer un nouveau labyrinthe de dimensions h x w
+        laby = cls(h, w)
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
         # Initialisation de tout les labels à (i,j)
         labels = {}
         for i, j in laby.get_cells():
             labels[(i, j)] = (i, j)
+<<<<<<< HEAD
         walls = laby.get_walls() # Liste de tous les murs du labyrinthe
         random.shuffle(walls) # Mélange de la liste des murs
+=======
+        # Liste de tous les murs du labyrinthe
+        walls = laby.get_walls()
+        # Mélange de la liste des murs
+        random.shuffle(walls)
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
         # Parcours de tous les murs et fusion des cellules adjacentes si les labels sont différents
         for c1, c2 in walls:
             if (0 <= c1[0] < h and
@@ -286,7 +409,12 @@ class Maze:
                     for cell in labels:
                         if labels[cell] == old_label:
                             labels[cell] = new_label
+<<<<<<< HEAD
         return laby # Renvoi le labyrinthe généré
+=======
+        # Renvoi le labyrinthe généré
+        return laby
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
 
     @classmethod
     def gen_exploration(cls, h, w):
@@ -297,6 +425,7 @@ class Maze:
         :param w: Nombre de colonnes du labyrinthe
         :return: Un labyrinthe
         """
+<<<<<<< HEAD
         laby = cls(h, w) # Création d'un nouveau labyrinthe
         cellules_disponibles = laby.get_cells() # Obtient toutes les cellules du labyrinthe
         cellule_initiale = random.choice(cellules_disponibles) # Choisit aléatoirement la cellule initiale
@@ -305,6 +434,22 @@ class Maze:
         # Explore tant que la pile n'est pas vide
         while pile:
             cellule_courante = pile.pop(0) # Retire la première cellule de la pile
+=======
+        # Créer un labyrinthe ayant pour dimensions h x w
+        laby = cls(h, w)
+        # Obtient toutes les cellules du labyrinthe
+        cellules_disponibles = laby.get_cells()
+        # Choisit aléatoirement la cellule initiale
+        cellule_initiale = random.choice(cellules_disponibles)
+        # Ajoute la cellule initiale aux cellules visitées
+        cellules_visitees = [cellule_initiale]
+        # Initialise une pile avec la cellule initiale
+        pile = [cellule_initiale]
+        # Explore tant que la pile n'est pas vide
+        while pile:
+            # Retire la première cellule de la pile
+            cellule_courante = pile.pop(0)
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
             # Obtient toutes les cellules adjacentes non visitées
             cellules_non_visitees = []
             for cellule in laby.get_contiguous_cells(cellule_courante):
@@ -320,6 +465,7 @@ class Maze:
                 laby.remove_wall(cellule_courante, cellule_suivante)
                 cellules_visitees.append(cellule_suivante)
                 pile.insert(0, cellule_suivante)
+<<<<<<< HEAD
         return laby # Renvoi le labyrinthe généré
 
     @classmethod
@@ -362,6 +508,9 @@ class Maze:
             for cellule in chemin[0:-1]:
                 cellules_dispo.remove(cellule)
 
+=======
+        # Renvoi le labyrinthe généré
+>>>>>>> f71ec3d6861973bbe73f79c479492cb2fd3d1adf
         return laby
 
     def overlay(self, content=None):
