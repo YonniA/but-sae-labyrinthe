@@ -92,6 +92,12 @@ class Maze:
 
     # Permet de rajouter un mur entre deux coordonnées c1 et c2 d'un labyrinthe self
     def add_wall(self, c1, c2):
+        """
+        Ajoute le mur entre deux cellules du labyrinthe
+
+        :param c1: Un tuple représentant les coordonnées de la première cellulee
+        :param c2: Un tuple représentant les coordonnées de la seconde cellule
+        """
         # Facultatif : on teste si les sommets sont bien dans le labyrinthe
         assert 0 <= c1[0] < self.height and \
             0 <= c1[1] < self.width and \
@@ -106,7 +112,7 @@ class Maze:
 
     def remove_wall(self, c1, c2):
         """
-        Supprime le mur entre deux cellules du labyrinthe et ne renvoi rien
+        Supprime le mur entre deux cellules du labyrinthe
 
         :param c1: Un tuple représentant les coordonnées de la première cellulee
         :param c2: Un tuple représentant les coordonnées de la seconde cellule
@@ -169,7 +175,10 @@ class Maze:
 
     def get_contiguous_cells(self, c):
         """
-        Retourne la liste des cellules contigües à c dans la grille (sans s’occuper des éventuels murs).
+        Renvoie la liste des cellules contigües à c dans la grille (sans s’occuper des éventuels murs).
+
+        :param c: la cellule
+        :return: renvoie une liste de voisins
         """
         (i, j) = c
         contiguous_cells = []
@@ -205,11 +214,11 @@ class Maze:
     @classmethod
     def gen_btree(cls, h, w):
         """
-        Créer un labyrinthe en utilisation l'algorithme de génération par arbre binaire
+        génére un labyrinthe grâce à l'algorithme d'arbre binaire.
 
-        :param h: Nombre de lignes du labyrinthe
-        :param w: Nombre de colonnes du labyrinthe
-        :return: Un labyrinthe
+        :param h: hauteur du labyrinthe
+        :param w: largeur du labyrinthe
+        :return: le labyrinthe généré
         """
         maze = Maze(h, w) # Création d'un nouveau labyrinthe
         # Itère sur toutes les cellules du labyrinthe
@@ -233,11 +242,11 @@ class Maze:
     @classmethod
     def gen_sidewinder(cls, h, w):
         """
-        Génère un labyrinthe de dimensions h x w en utilisant l'algorithme Sidewinder
+        génére un labyrinthe grâce à l'algorithme Sidewinder.
 
-        :param h: Nombre de lignes a générer pour le labyrinthe
-        :param w: Nombre de colonnes à générer pour le labyrinthe
-        :return: Un labyrinthe ayant pour dimensions h x w
+        :param h: hauteur du labyrinthe
+        :param w: largeur du labyrinthe
+        :return: le labyrinthe généré
         """
         maze = Maze(h, w) # Création d'un nouveau labyrinthe
         # Parcours des cellules du labyrinthe avec l'algorithme Sidewinder
@@ -263,11 +272,11 @@ class Maze:
     @classmethod
     def gen_fusion(cls, h, w):
         """
-        Créer un labyrinthe en utilisant l'algorithme de fusion de chemin
+        génére un labyrinthe grâce à l'algorithme de fusion de chemins.
 
-        :param h: Nombre de lignes du labyrinthe
-        :param w: Nombre de colonnes du labyrinthe
-        :return: Un labyrinthe
+        :param h: hauteur du labyrinthe
+        :param w: largeur du labyrinthe
+        :return: le labyrinthe généré
         """
         laby = cls(h, w) # Création d'un nouveau labyrinthe
         # Initialisation de tout les labels à (i,j)
@@ -300,11 +309,11 @@ class Maze:
     @classmethod
     def gen_exploration(cls, h, w):
         """
-        Créer un labyrinthe en utilisant l'algorithme d'exploration exhaustive
+        génére un labyrinthe grâce à l'algorithme de l'exploration exhaustive.
 
-        :param h: Nombre de lignes du labyrinthe
-        :param w: Nombre de colonnes du labyrinthe
-        :return: Un labyrinthe
+        :param h: hauteur du labyrinthe
+        :param w: largeur du labyrinthe
+        :return: le labyrinthe généré
         """
         laby = cls(h, w) # Création d'un nouveau labyrinthe
         cellules_disponibles = laby.get_cells() # Obtient toutes les cellules du labyrinthe
@@ -347,6 +356,13 @@ class Maze:
 
     @classmethod
     def gen_wilson(cls, h, w):
+        """
+        génére un labyrinthe grâce à l'algorithme Wilson.
+
+        :param h: hauteur du labyrinthe
+        :param w: largeur du labyrinthe
+        :return: le labyrinthe généré
+        """
         # Génère un labyrinthe plein de murs
         laby = cls(h, w)
 
@@ -503,6 +519,8 @@ class Maze:
         """
         Résout le labyrinthe en utilisant la technique de la main droite, à partir de la cellule de départ donnée.
 
+        :param start: cellule de départ
+        :param stop: cellule de fin
         :return: La liste ordonnée des cellules visitées pour atteindre la sortie.
         """
         # On initialise la cellule courante avec la cellule de départ et la direction avec 'droite'.
@@ -549,7 +567,21 @@ class Maze:
         return cellules_visitees
 
     def distance_geo(self,c1,c2):
+        """
+        Renvoie la distance geo géodésique
+
+        :param c1: première cellule
+        :param c2: deuxième cellule
+        :return: la distance geo géodésique
+        """
         return len(self.solve_bfs(c1, c2))
 
     def distance_man(self,c1,c2):
+        """
+        Renvoie la distance de manhattan
+
+        :param c1: première cellule
+        :param c2: deuxième cellule
+        :return: la distance de manhattan
+        """
         return abs(c1[0]-c2[0]) + abs(c1[1]-c2[1])
