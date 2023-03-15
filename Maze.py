@@ -548,3 +548,6 @@ class Maze:
                     direction_courante = 'droite'
         return cellules_visitees
 
+    def distance_geo(self,c1,c2):
+        return len(self.solve_bfs(c1, c2))
+

@@ -154,3 +154,5 @@ str_solution = {c:'*' for c in solution}
 str_solution[( 0,  0)] = 'D'
 str_solution[(14, 14)] = 'A'
 print(laby.overlay(str_solution))
+
+print(laby.distance_geo((0,0),(14,14)))
