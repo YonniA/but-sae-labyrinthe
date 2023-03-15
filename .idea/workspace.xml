@@ -111,7 +111,9 @@
       <workItem from="1678385527689" duration="1356000" />
       <workItem from="1678651972100" duration="3524000" />
       <workItem from="1678656910319" duration="675000" />
-      <workItem from="1678829016181" duration="4431000" />
+      <workItem from="1678829016181" duration="5270000" />
+      <workItem from="1678898574305" duration="21000" />
+      <workItem from="1678898704208" duration="4238000" />
     </task>
     <servers />
   </component>
@@ -129,20 +131,9 @@
       </map>
     </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/TestMaze.py</url>
-          <line>80</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SAE_laby$main.coverage" NAME="Maze Coverage Results" MODIFIED="1678373277113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/sae_s2_labyrinthes_sauvageot_nino_andreu_yonni$TestMaze.coverage" NAME="TestMaze Coverage Results" MODIFIED="1678832972542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/sae_s2_labyrinthes_sauvageot_nino_andreu_yonni$TestMaze.coverage" NAME="TestMaze Coverage Results" MODIFIED="1678903753251" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/sae_s2_labyrinthes_sauvageot_nino_andreu_yonni$Maze.coverage" NAME="Maze Coverage Results" MODIFIED="1678377575603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
